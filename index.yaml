@@ -3,6 +3,16 @@ entries:
   archodex-agent:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2024-08-23T16:24:13.988043077Z"
+    description: Archodex Agent
+    digest: 81914ede8cc5b2566750acc4637314a59cf31ff95864be46e6c59fafffd9b539
+    name: archodex-agent
+    type: application
+    urls:
+    - https://github.com/txase/archodex-helm-charts/releases/download/archodex-agent-0.1.1/archodex-agent-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2024-08-23T01:01:46.05475256Z"
     description: Archodex Agent
     digest: f5e5957df25a0682691d94f83a39feef8e58628a16425bd988a24da171b9249a
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/txase/archodex-helm-charts/releases/download/archodex-agent-0.1.0/archodex-agent-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-23T01:01:46.054766276Z"
+generated: "2024-08-23T16:24:13.988051553Z"
