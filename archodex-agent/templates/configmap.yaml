@@ -1,0 +1,10 @@
+{{- range $name, $rules := .Values.rules -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: archodex-agent-{{ $name }}
+data:
+  {{ $name }}.yaml: |-
+    {{ $rules | toYaml | indent 6 | trim }}
+{{ end }}
