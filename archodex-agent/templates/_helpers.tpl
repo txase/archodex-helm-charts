@@ -54,9 +54,19 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "archodex-agent.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
 {{- default (include "archodex-agent.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
+
+{{/*
+Create the name of the cluster role to use
+*/}}
+{{- define "archodex-agent.clusterRoleName" -}}
+{{- default (include "archodex-agent.fullname" .) .Values.clusterRole.name }}
+{{- end }}
+
+{{/*
+Create the name of the cluster role binding to use
+*/}}
+{{- define "archodex-agent.clusterRoleBindingName" -}}
+{{- default (include "archodex-agent.fullname" .) .Values.clusterRoleBinding.name }}
 {{- end }}

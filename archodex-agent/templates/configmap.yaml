@@ -1,9 +1,13 @@
+{{- $fullname := include "archodex-agent.fullname" . -}}
+{{- $labels := include "archodex-agent.labels" . -}}
 {{- range $name, $rules := .Values.rules -}}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: archodex-agent-{{ $name }}
+  name: {{ printf "%s-%s" $fullname $name }}
+  labels:
+    {{- $labels | nindent 4 }}
 data:
   {{ $name }}.yaml: |-
     {{ $rules | toYaml | indent 6 | trim }}

@@ -1,0 +1,33 @@
+fullnameOverride: archodex-agent-chart-test
+
+environment:
+  - name: RUST_LOG
+    value: agent_ebpf::engine::parser::http=debug,info
+
+rules:
+  curl:
+    Rules:
+      - Hostnames:
+          - example.com
+        TransportRules:
+          - Http:
+              Request:
+                Methods:
+                  - GET
+                Routes:
+                  - /:path*
+              ResourceCaptures:
+                - Type: HTTPS Server
+                  Id: "{tls_server_name}"
+                  Contains:
+                    - Type: Route
+                      Id: "/{request.path.path}"
+              EventCaptures:
+                - Events:
+                    - Types:
+                        - "{request.method | http_method_to_action}"
+                      Resources:
+                        - - Type: HTTPS Server
+                            Id: "{tls_server_name}"
+                          - Type: Route
+                            Id: "/{request.path.path}"

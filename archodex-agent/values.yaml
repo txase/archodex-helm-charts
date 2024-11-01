@@ -17,14 +17,24 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
   # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # The name of the service account to create.
+  # A name is generated using the fullname template if not set.
+  name: ""
+
+clusterRole:
+  # Annotations to add to the cluster role
+  annotations: {}
+  # The name of the cluster role to crate.
+  # A name is generated using the fullname template if not set.
+  name: ""
+
+clusterRoleBinding:
+  # Annotations to add to the cluster role binding
+  annotations: {}
+  # The name of the cluster role binding to create.
+  # A name is generated using the fullname template if not set.
   name: ""
 
 podAnnotations: {}
