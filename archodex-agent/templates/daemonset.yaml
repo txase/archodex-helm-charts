@@ -39,8 +39,10 @@ spec:
             privileged: true
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.logReport }}
           args:
+            - --config
+            - /config/rules
+          {{- if .Values.logReport }}
             - --log-report
             - {{ .Values.logReport | quote }}
           {{- end }}
