@@ -5,8 +5,16 @@
 image:
   repository: ghcr.io/txase/archodex-agent-ebpf
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
   tag: latest
+
+# Specify the report API key secret name to use. If you do not specify a key (or
+# leave it empty), the agent will not report logs.
+reportApiKeySecretName: ""
+
+# Log captured resources and events when reports will (or would) be sent to the
+# Archodex service. This defaults to 'true' when reportApiKeySecretName is not
+# set or is empty. Otherwise, it defaults to 'false'.
+logReport: ""
 
 rules: {}
 
@@ -43,11 +51,8 @@ podLabels: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
+# Additional resources on the output Deployment definition.
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -71,8 +76,7 @@ volumeMounts: []
 nodeSelector: {}
 
 tolerations:
-  # these tolerations are to have the daemonset runnable on control plane nodes
-  # remove them if your control plane nodes should not run pods
+  # These tolerations make the daemonset runnable on control plane nodes.
   - key: node-role.kubernetes.io/control-plane
     operator: Exists
     effect: NoSchedule

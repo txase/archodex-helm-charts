@@ -39,6 +39,11 @@ spec:
             privileged: true
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.logReport }}
+          args:
+            - --log-report
+            - {{ .Values.logReport | quote }}
+          {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -51,6 +56,13 @@ spec:
               mountPath: /config/rules
               readOnly: true
           env:
+          {{- if .Values.reportApiKeySecretName }}
+            - name: ARCHODEX_REPORT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.reportApiKeySecretName }}
+                  key: value
+          {{- end }}
           {{- with .Values.environment }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
